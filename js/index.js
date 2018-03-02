@@ -6,8 +6,38 @@ function Selector(ele){
 window.onload = function () {
   objBannerBtn[0].className = 'banner-active'
   ourButtonArr[0].className = 'button-active'
-  mainProductHeaderAnimation()
+  mainTitleAndSectionAnimation (mainProductHeader,mainProductSectionFirst,mainProductSection,mProSecArr)
+  mainTitleAndSectionAnimation (mainOurHeader,mainOurSectionFirst,mainOurSection,mOurSecArr)
+  window.onscroll = function () {
+    mainTitleAndSectionAnimation (mainProductHeader,mainProductSectionFirst,mainProductSection,mProSecArr)
+    mainTitleAndSectionAnimation (mainOurHeader,mainOurSectionFirst,mainOurSection,mOurSecArr)
+  }
 }
+
+//############ main title animation ############
+function mainTitleAndSectionAnimation(header, sectionFirst, section, eleArr) {
+  // target object
+  let hs  = header.offsetTop       //HeaderScroll
+  let sfs = sectionFirst.offsetTop //SectionFirstScroll
+
+  // body window
+  let bodyScroll   = document.documentElement.scrollTop // bodyScroll
+  let windowHeight = document.documentElement.clientHeight //windowHeight
+
+  // header
+  if ( bodyScroll > hs-windowHeight/1.4 ) {
+    header.className = eleArr[0]
+  }
+
+  // section
+  for (let i=0; i<section.length; i++) {
+    if ( bodyScroll >= section[i].offsetTop-windowHeight/1.4 ){
+    // main-product-section
+      section[i].className =  eleArr[1] + " " + eleArr[i+2]
+    }
+  }
+}
+//############ main title animation end #######
 
 //############ banner ###########
 
@@ -96,7 +126,7 @@ function FunSidebarConsult( spanColor, right, bgc, classname, src, dir ) {
     sidebarConsultSpan[i].style.backgroundColor = spanColor
   }
   sidebarPop.style.right = right
-  sidebarConsult.style.background   = bgc
+  sidebarConsult.style.background = bgc
   sidebarConsult.children[4].className = classname
   sidebarConsult.children[3].setAttribute(src, dir)
 }
@@ -112,7 +142,6 @@ sidebarPopClose.onclick = () => {
 //############ sidebar totop ###########
 const sidebarTotop = Selector(".sidebar-totop")[0]
 sidebarTotop.onclick = function () {
-  console.log(window);
   $("html,body").animate({scrollTop:0},300)
 }
 //############ sidebar totop end #######
@@ -125,7 +154,7 @@ sidebarHide.onclick = function () {
   sidebar.style.right    = "-42px"
   sidebarVis.style.right = "42px"
 }
-sidebarVis.onclick     = function () {
+sidebarVis.onclick = function () {
   sidebar.style.right    = "0px"
   sidebarVis.style.right = "-42px"
 }
@@ -133,36 +162,23 @@ sidebarVis.onclick     = function () {
 //############ sidebar hide end ########
 
 //############ product animation #################
-const mainProductHeader   = Selector(".main-product-header")[0]
-const mainProductSection  = Selector(".main-product-section")
+const mainProductHeader        = Selector(".main-product-header")[0]
+const mainProductSection       = Selector(".main-product-section")
 const mainProductSectionFirst  = Selector(".main-product-section")[0]
 
-function mainProductHeaderAnimation () {
-  window.onscroll = function () {
-    // target object
-    let mainProductHeaderScroll  = mainProductHeader.offsetTop
-    let mainProductSectionFirstScroll = mainProductSectionFirst.offsetTop
+const mProSecArr = [
+  "main-product-header-animation",
+  "main-product-section",
+  "main-product-section-animation",
+  "main-product-section-animation2",
+  "main-product-section-animation3",
+  "main-product-section-animation",
+]
+// onload
+// mainTitleAnimation (mainProductHeader,mainProductSectionFirst,mainProductSection,mProSecArr)
 
-    // body window
-    let bodyScroll = document.documentElement.scrollTop
-    let windowHeight = document.documentElement.clientHeight
 
-    // header
-    if ( bodyScroll >= mainProductHeaderScroll-windowHeight/2 ) {
-      mainProductHeader.className = "main-product-header-animation"
-    }
-
-    // section
-    if ( bodyScroll >= mainProductSectionFirstScroll-windowHeight/2-133 ){
-      mainProductSection[0].className = "main-product-section main-product-section-animation"
-      mainProductSection[1].className = "main-product-section main-product-section-animation2"
-      mainProductSection[2].className = "main-product-section main-product-section-animation3"
-      mainProductSection[3].className = "main-product-section main-product-section-animation"
-    }
-  }
-}
-
-//############ product animation #################
+//############ product animation end #################
 
 //############ our-slip ##########################
 const ourPcSlip      = Selector(".our-pc-slip")[0]
@@ -223,10 +239,26 @@ function OurImgChange( n ) {
     ourButtonArr[j].className = " "
   }
   ourButtonArr[n].className = "button-active"
-  console.log(n);
 
   ourPcSlip.style.top = "-" + n * pcImgHeight + "px"
   ourMobileSlip.style.top = "-" + n * mobileImgHeight + "px"
   ourPadSlip.style.top = "-" + n * padImgHeight + "px"
   ourInd = n
 }
+//############ our-slip end ############
+const mainOurHeader   = Selector(".main-our-header")[0]
+const mainOurSection  = Selector(".main-our-section")
+const mainOurSectionFirst  = Selector(".main-our-section")[0]
+
+const mOurSecArr = [
+  "main-our-header-animation",
+  "main-our-section",
+  "main-our-section-animation2",
+  "main-our-section-animation",
+  "main-our-section-animation3",
+  "main-our-section-animation2",
+  "main-our-section-animation",
+  "main-our-section-animation3"
+]
+// onload
+// mainTitleAnimation (mainOurHeader,mainOurSectionFirst,mainOurSection,mOurSecArr)
