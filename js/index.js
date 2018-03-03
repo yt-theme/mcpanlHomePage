@@ -246,6 +246,8 @@ function OurImgChange( n ) {
   ourInd = n
 }
 //############ our-slip end ############
+
+//############ our section animation ###
 const mainOurHeader   = Selector(".main-our-header")[0]
 const mainOurSection  = Selector(".main-our-section")
 const mainOurSectionFirst  = Selector(".main-our-section")[0]
@@ -262,3 +264,4 @@ const mOurSecArr = [
 ]
 // onload
 // mainTitleAnimation (mainOurHeader,mainOurSectionFirst,mainOurSection,mOurSecArr)
+//############ our section animation end #
