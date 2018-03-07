@@ -2,23 +2,26 @@ function Selector(ele){
   return document.querySelectorAll(ele)
 }
 
+window.addEventListener('load',init)
 // onload
-window.onload = function () {
+function init () {
   objBannerBtn[0].className = 'banner-active'
   ourButtonArr[0].className = 'button-active'
-  mainTitleAndSectionAnimation (mainProductHeader,mainProductSectionFirst,mainProductSection,mProSecArr)
-  mainTitleAndSectionAnimation (mainOurHeader,mainOurSectionFirst,mainOurSection,mOurSecArr)
+  mainTitleAndSectionAnimation (mainProductHeader,mainProductSection,mProSecArr)
+  mainTitleAndSectionAnimation (mainOurHeader,mainOurSection,mOurSecArr)
+  // ourBannerAnimation()
   window.onscroll = function () {
-    mainTitleAndSectionAnimation (mainProductHeader,mainProductSectionFirst,mainProductSection,mProSecArr)
-    mainTitleAndSectionAnimation (mainOurHeader,mainOurSectionFirst,mainOurSection,mOurSecArr)
+    mainTitleAndSectionAnimation (mainProductHeader,mainProductSection,mProSecArr)
+    mainTitleAndSectionAnimation (mainOurHeader,mainOurSection,mOurSecArr)
+    ourBannerAnimation()
+    mainMarketAnimation(marketHeader,marketSection,marketSecArr)
   }
 }
 
 //############ main title animation ############
-function mainTitleAndSectionAnimation(header, sectionFirst, section, eleArr) {
+function mainTitleAndSectionAnimation(header, section, eleArr) {
   // target object
   let hs  = header.offsetTop       //HeaderScroll
-  let sfs = sectionFirst.offsetTop //SectionFirstScroll
 
   // body window
   let bodyScroll   = document.documentElement.scrollTop // bodyScroll
@@ -164,7 +167,6 @@ sidebarVis.onclick = function () {
 //############ product animation #################
 const mainProductHeader        = Selector(".main-product-header")[0]
 const mainProductSection       = Selector(".main-product-section")
-const mainProductSectionFirst  = Selector(".main-product-section")[0]
 
 const mProSecArr = [
   "main-product-header-animation",
@@ -250,7 +252,6 @@ function OurImgChange( n ) {
 //############ our section animation ###
 const mainOurHeader   = Selector(".main-our-header")[0]
 const mainOurSection  = Selector(".main-our-section")
-const mainOurSectionFirst  = Selector(".main-our-section")[0]
 
 const mOurSecArr = [
   "main-our-header-animation",
@@ -265,3 +266,45 @@ const mOurSecArr = [
 // onload
 // mainTitleAnimation (mainOurHeader,mainOurSectionFirst,mainOurSection,mOurSecArr)
 //############ our section animation end #
+
+//############ our banner ################
+const mainOurBanner       = Selector(".main-our-banner")[0]
+const mainOurBannerScroll =  mainOurBanner.offsetTop
+function ourBannerAnimation () {
+  let bodyScroll   = document.documentElement.scrollTop // bodyScroll
+  let windowHeight = document.documentElement.clientHeight //windowHeight
+  if ( bodyScroll > mainOurBannerScroll-windowHeight/1.4 ) {
+    mainOurBanner.className = "main-our-banner main-our-banner-animation"
+  }
+}
+//############ our banner end ############
+const marketHeader  = Selector(".main-market-header")[0]
+const marketSection = Selector(".market-article-section")
+const marketSecArr  = [
+  'main-market-header-animation',
+  'market-article-section',
+  'market-article-section-animation',
+  'main-market-header'
+]
+function mainMarketAnimation(header, section, eleArr) {
+  // target object
+  let hs  = header.offsetTop       //HeaderScroll
+
+  // body window
+  let bodyScroll   = document.documentElement.scrollTop // bodyScroll
+  let windowHeight = document.documentElement.clientHeight //windowHeight
+
+  // header
+  if ( bodyScroll > hs-windowHeight/1.4 ) {
+    header.className =  eleArr[3] + ' ' + eleArr[0]
+  }
+
+  // section
+  for (let i=0; i<section.length; i++) {
+    if ( bodyScroll >= section[i].offsetTop-windowHeight/1.4 ){
+    // main-product-section
+      section[i].className =  eleArr[1] + " " + eleArr[2]
+    }
+  }
+}
+// mainMarketAnimation(marketHeader,marketSection,marketSecArr)

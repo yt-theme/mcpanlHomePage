@@ -465,7 +465,7 @@ header {
 .main-product-header>p,
 .main-product-header-animation> p,
  .main-our-header-animation> p,
-  .main-our-header>p
+  .main-our-header>p,
    .main-market-header>p,
     .main-cooperate-header>p {
   margin-bottom: 50px;
@@ -624,6 +624,27 @@ header {
   /*animation-delay: 1s;*/
   animation: mainSectionTranslateRightAnimation 1s 0.5s;
 }
+/* our banner wrap animation */
+@keyframes ourBanner {
+  0%   { transform: scale3d(0.7, 0.7, 1); }
+  15%  { transform: scale3d(1, 1, 1); }
+  25%  { transform: scale3d(0.8, 0.8, 1); }
+  35%  { transform: scale3d(1, 1, 1); }
+  50%  { transform: scale3d(0.85, 0.85, 1); }
+  65%  { transform: scale3d(1, 1, 1); }
+  75%  { transform: scale3d(0.9, 0.9, 1); }
+  85%  { transform: scale3d(0.95, 0.95, 1); }
+  100% { transform: scale3d(1, 1, 1); }
+}
+.main-our-banner-animation {
+  display: flex;
+  position: relative;
+  top: 0;
+  animation: ourBanner 0.7s;
+}
+.main-our-banner-wrap {
+  /*animation: ourBanner 0.7s;*/
+}
 .main-our-section img {
   margin-right: 27px;
 }
@@ -755,14 +776,21 @@ header {
   cursor: pointer;
   background-color: #2D9EDD;
 }
-.main-market-header {
+.main-market {
   margin-top: 0;
   background-image: url("../images/0181.jpg");
   background-size: 100%;
   opacity: 1;
   padding-bottom: 50px;
 }
-.main-market-header> h1, .main-market-header>p {
+.main-market-header-animation {
+  opacity: 1;
+  animation: mainProductTitle 1s;
+}
+.main-market-header {
+  
+}
+.main-market-header> h1, .main-market-header> p {
   color: #ffffff;
 }
 .main-market-header>p {
@@ -772,6 +800,9 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+.main-market-section {
+
 }
 .market-sidebar {
   width: 22.57%; /*288/1280*/
@@ -796,11 +827,20 @@ header {
   height: 36.48vw; /*467/1280*/
   margin-left: 12px;
 }
+/* market section ani */
+@keyframes marketSection {
+  0%  { transform: rotateY(140deg);}
+  45%  { transform: rotateY(-60deg);}
+  75%  { transform: rotateY(40deg);}
+  100%  { transform: rotateY(0);}
+}
+.market-article-section-animation {
+  animation: marketSection 1.5s;
+}
 .market-article-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   width: 31.90%; /*288/903*/
   height: 43.86%; /*211/481*/
   margin-right: 1.43%; /*13/903*/
@@ -808,7 +848,7 @@ header {
   padding-left: 5.34%; /*29/288*/
   padding-right: 5.34%; /*43/288*/
   background-color: #fff;
-  transition: all 0.3s;
+  /*transition: all 0.3s;*/
 }
 .market-article-section:hover {
   transform: translate(0, -5px);
